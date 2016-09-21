@@ -1,5 +1,3 @@
-A sample for the Typesafe Stack (http://typesafe.com/stack).
-
-Scala sample project using Scala and SBT.
+This is my attempt in improving Arxiv.
 
 To run and test it use SBT invoke: 'sbt run'
