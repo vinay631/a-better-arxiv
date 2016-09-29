@@ -28,8 +28,8 @@ class PaperScraper {
   def attributeEquals(name: String, value: String)(node: Node) = {
     node.attribute(name).filter(_==value).isDefined
   }
-    
-  def scrapePaperInfo(startIndex:Int=8000, maxIndex:Int=10000) = {
+  
+  def scrapePaperInfo(startIndex:Int=1000, maxIndex:Int=1000) = {
     val query = "search_query=%s&sortBy=lastUpdatedDate&start=%d&max_results=%d"
     val completeURL = (baseURL + query).format(this.searchParams , startIndex, maxIndex)
     val page = Source.fromURL(completeURL).mkString
@@ -51,7 +51,7 @@ class PaperScraper {
     val row = paperIdVersions.filter(p => p.id === id)
     val insertOrUpdateAction = (row.exists.result.flatMap { exists => 
       if(!exists) {
-        paperIdVersions += (id, ver, url)
+        paperIdVersions += (id, ver, url, false)
       } else {
         row.map(_.version).update(ver)
         row.map(_.url).update(url)
