@@ -21,7 +21,7 @@ class PaperScraper {
   val searchParams = "cat:cs.CV+OR+cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL+OR+cat:cs.NE+OR+cat:stat.ML"
   
   def parseIdVersion(url:String): (String, Int) = {
-    val idVersion = url.split("\\.").last.split("v")
+    val idVersion = url.split("/").last.split("v")
     (idVersion(0), idVersion(1).toInt)
   }
   
@@ -29,9 +29,10 @@ class PaperScraper {
     node.attribute(name).filter(_==value).isDefined
   }
   
-  def scrapePaperInfo(startIndex:Int=1000, maxIndex:Int=1000) = {
+  def scrapePaperInfo(startIndex:Int=9000, maxIndex:Int=10000) = {
     val query = "search_query=%s&sortBy=lastUpdatedDate&start=%d&max_results=%d"
     val completeURL = (baseURL + query).format(this.searchParams , startIndex, maxIndex)
+    println(completeURL)
     val page = Source.fromURL(completeURL).mkString
     val xml = XML.loadString(page)
     val entries = xml \ "entry"

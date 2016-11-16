@@ -1,5 +1,7 @@
 *.class
 *.log
+pdfs/*.pdf
+*.pdf
 
 # sbt specific
 .cache

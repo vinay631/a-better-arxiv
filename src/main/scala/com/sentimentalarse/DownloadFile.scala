@@ -8,7 +8,6 @@ import sys.process._
 class DownloadFile {
   
   def fileDownloader(url: String, fileName: String) = {
-    print("Downloading...", url, fileName)
     new URL(url) #> new File(fileName) !!
   }
  
